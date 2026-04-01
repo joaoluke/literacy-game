@@ -1,4 +1,5 @@
 import { Volume2, Star } from 'lucide-react';
+import logo from './assets/ch.png';
 import { useGameEngine } from './hooks/useGameEngine';
 import { TopBar } from './components/TopBar';
 import { Button3D } from './components/Button3D';
@@ -14,9 +15,10 @@ export default function App() {
   if (gameState === 'menu') {
     return (
       <div className="main-menu">
-        <Star size={80} color="#ffc800" style={{ marginBottom: 20 }} className="animate-pop" />
-        <h1>Aprender Brincando</h1>
-        <p>Um jogo divertido para aprender a ler!</p>
+        <img src={logo} alt="Jogos do Charles" style={{ width: 180, height: 180, marginBottom: 20, objectFit: 'contain' }} className="animate-pop" />
+        <h1 style={{fontSize: '2.8rem', color: '#ffc800'}}>Jogos do Charles</h1>
+        <p style={{ color: '#1cb0f6', fontSize: '1.4rem', fontWeight: 800, marginBottom: 20 }}>NÍVEL {stage}</p>
+        <p>Um jogo divertido para aprender!</p>
         <Button3D onClick={startGame}>
           COMEÇAR A JOGAR
         </Button3D>

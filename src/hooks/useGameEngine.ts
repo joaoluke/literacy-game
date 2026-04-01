@@ -6,7 +6,10 @@ import { speak } from '../utils/audio';
 
 export function useGameEngine() {
   const [gameState, setGameState] = useState<GameState>('menu');
-  const [stage, setStage] = useState<number>(1);
+  const [stage, setStage] = useState<number>(() => {
+    const saved = localStorage.getItem('charles_stage');
+    return saved ? parseInt(saved, 10) : 1;
+  });
   const [progress, setProgress] = useState<number>(0);
   const [lives, setLives] = useState<number>(5);
   
@@ -87,7 +90,6 @@ export function useGameEngine() {
 
   const startGame = () => {
     setGameState('playing');
-    setStage(1);
     setProgress(0);
     setLives(5);
     setSeenWords([]);
@@ -132,7 +134,9 @@ export function useGameEngine() {
   };
 
   const nextLevel = () => {
-    setStage(stage + 1);
+    const next = stage + 1;
+    setStage(next);
+    localStorage.setItem('charles_stage', next.toString());
     setProgress(0);
     setGameState('playing');
     nextQuestion();
